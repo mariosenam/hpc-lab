@@ -41,6 +41,8 @@ Téléchargez la dernière version de R depuis le [site officiel](https://cran.r
 wget https://cran.r-project.org/src/base/R-4/R-4.1.0.tar.gz
 ```
 
+Assurez-vous de modifier les numéros de version et les chemins en fonction de la version spécifique de R que vous souhaitez installer.
+
 ### Extraction des sources
 
 Extrayez l'archive téléchargée :
@@ -104,7 +106,7 @@ Vérifiez que R est correctement installé en exécutant la commande suivante :
 
 ```bash
 cd # pour retourner dans votre répertoire personnel
-./softwares/R/4.1.0/bin --version
+./softwares/R/4.1.0/bin/R --version
 ```
 
 ou
@@ -140,8 +142,6 @@ Vous pouvez installer le package _readxl_ qui permet de lire les fichiers excel 
 
 Vous avez maintenant installé R à partir des sources sur votre système. Vous pouvez maintenant commencer à utiliser R pour vos projets statistiques et graphiques.
 
-Assurez-vous de modifier les numéros de version et les chemins en fonction de la version spécifique de R que vous souhaitez installer.
-
 ## Installation de Python à partir des sources
 
 Ce guide explique comment installer Python à partir des sources sur un système Linux.
@@ -174,6 +174,8 @@ Téléchargez la dernière version de Python depuis le [site officiel](https://w
 ```bash
 wget https://www.python.org/ftp/python/3.12.4/Python-3.12.4.tgz
 ```
+
+Assurez-vous de modifier les numéros de version et les chemins en fonction de la version spécifique de Python que vous souhaitez installer.
 
 ### Extraction des sources
 
@@ -210,7 +212,7 @@ Vous pouvez afficher toutes les options de configuration en faisant :
 ./configure -h
 ```
 
-## Compilation et installation
+### Compilation et installation
 
 Pour compiler et installer Python, utilisez la commande suivante :
 
@@ -219,23 +221,89 @@ make -j2
 make install
 ```
 
-L'option `-j2` permet de paralléliser la compilation en utilisant tous deux(02) cœurs de votre processeur, ce qui accélère le processus.
+L'option `-j2` permet de paralléliser la compilation en utilisant tous deux (02) cœurs de votre processeur, ce qui accélère le processus.
 
-## Vérification de l'installation
+Félicitations vous venez d'installer **Python** dans le répertoire `$HOME/softwares/python/3.12.4`.
 
-Vérifiez que Python est correctement installé en exécutant la commande suivante :
+Vous pouvez vérifier le contenu en faisant :
 
 ```bash
-python3.10 --version
+ls $HOME/softwares/python/3.12.4
 ```
 
-Vous devriez voir la version de Python que vous venez d'installer.
+Le répertoire `bin` contient les binaires(executables) de notre programme **Python**. Vous pouvez lister le contenu du répertoire en faisant :
 
-## Conclusion
+```bash
+ls $HOME/softwares/python/3.12.4/bin
+```
+
+### Vérification de l'installation
+
+Vérifiez que **Python** est correctement installé en exécutant la commande suivante :
+
+```bash
+cd # pour retourner dans votre répertoire personnel
+./softwares/python/3.12.4/bin/python3 --version
+```
+
+ou
+
+```bash
+cd $HOME/softwares/python/3.12.4/bin # pour vous rendre dans le répertoire d'installation
+./python3 --version
+```
+
+Vous devriez voir la version de **Pyhton** que vous venez d'installer.
+
+### Configuration pour rendre permanente l'utilisation de la version de Python installée
+
+Pour ce faire il vous faut modifier le fichier .bashrc qui se trouve dans votre répertoire personnel en utilisant l'editeur de votre choix `nano` ou `vim` etc
+
+```bash
+cd # Pour repartir dans votre dossier personnel
+vim .bashrc
+```
+
+Votre fichier doit ressembler à ceci :
+
+```bash
+# .bashrc
+
+# Source global definitions
+if [ -f /etc/bashrc ]; then
+	. /etc/bashrc
+fi
+
+# User specific environment
+if ! [[ "$PATH" =~ "$HOME/.local/bin:$HOME/bin:" ]]
+then
+    PATH="$HOME/.local/bin:$HOME/bin:$PATH"
+fi
+export PATH
+
+# Uncomment the following line if you don't like systemctl's auto-paging feature:
+# export SYSTEMD_PAGER=
+
+# User specific aliases and functions
+
+export PATH=$HOME/softwares/python/3.12.4/bin:$PATH
+
+```
+
+Afin que vos changements soient pris en compte vous pouvez vous déconnecter et vous reconnecter ou pouvez taper la commande suivante :
+
+```bash
+source .bashrc
+```
+
+### Installation des packages Python
+
+Le gestionnaire de paquet de **Python** est `pip3`. Pour installer un paquet utilisez la commande.
+
+```bash
+pip3 install --user pandas
+```
+
+### Conclusion
 
 Vous avez maintenant installé Python à partir des sources sur votre système. Vous pouvez maintenant commencer à utiliser Python pour vos projets.
-
-```
-
-Assurez-vous de modifier les numéros de version et les chemins en fonction de la version spécifique de Python que vous souhaitez installer.
-```
